@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop Catalogue</title>
+</head>
+<body>
+<h1>Products Catalogue</h1>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Product</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product : ${products}">
+        <td data-th-text="${product.id}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

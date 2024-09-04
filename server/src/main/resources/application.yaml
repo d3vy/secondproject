@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/secondproject_server_database
+    username: postgres
+    password: glhf5561783742
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    schemas:
+      -product
+  profiles:
+    active:
+      - postgres
+  jpa:
+    show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/realms/secondproject
+server:
+  port: 8081
+logging:
+  level:
+    sql: info
+
+
+      

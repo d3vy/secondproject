@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/secondproject_client_database
+    username: postgres
+    password: glhf5561783742
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    schemas:
+      - customer
+      - manager
+  profiles:
+    active:
+      - postgres
+  jpa:
+    show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: client-module
+            client-secret: AtEXiFUCk5I2if9b4pN4UQBDCEBhr4To
+            scope:
+              - openid
+              - edit_products_catalogue
+              - microprofile-jwt
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8083/realms/secondproject
+            user-name-attribute: preferred_username
+server:
+  port: 8082
+logging:
+  level:
+    sql: info
+
+shop:
+  services:
+    catalogue:
+      uri: http://localhost:8081
+      registration-id: keycloak
