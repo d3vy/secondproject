@@ -5,6 +5,9 @@ import com.devy.restserver.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,5 +19,16 @@ public class DefaultProductService implements ProductService {
     @Override
     public Iterable<Product> findAllProducts() {
         return this.productRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Product createProduct(String title, String details) {
+        return this.productRepository.save(new Product(null, title, details));
+    }
+
+    @Override
+    public Optional<Product> findProduct(Integer id) {
+        return this.productRepository.findById(id);
     }
 }

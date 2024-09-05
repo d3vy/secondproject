@@ -1,6 +1,5 @@
 package com.devy.client.config;
 
-import com.devy.client.RestServer.ProductsRestServer;
 import com.devy.client.RestServer.ProductsRestServerImpl;
 import com.devy.client.security.OAuthClientHttpRequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +25,7 @@ public class ClientBeans {
                 .requestInterceptor(
                         new OAuthClientHttpRequestInterceptor(
                                 new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository,
-                                        oauth2AuthorizedClientRepository), registrationId)).build());
+                                        oauth2AuthorizedClientRepository), registrationId))
+                .build());
     }
 }

@@ -1,9 +1,14 @@
 package com.devy.client.controllers;
 
+import com.devy.client.RestServer.ProductsRestServer;
+import com.devy.client.controllers.payload.NewProductPayload;
+import com.devy.client.models.Product;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,9 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class ProductsController {
 
-    @GetMapping("catalogue.html")
-    public String getProductsCatalogue(Model model){
-        return "shop/products/catalogue.html";
+    private final ProductsRestServer productsRestServer;
+
+    @GetMapping("catalogue")
+    public String getProductsCatalogue(Model model) {
+        model.addAttribute("products", productsRestServer.finaAllProducts());
+        return "shop/products/catalogue";
     }
+
+    @GetMapping("create")
+    public String getCreateProductPage() {
+        return "shop/products/create";
+    }
+
+    @PostMapping("create")
+    public String createProduct(NewProductPayload payload,
+                                Model model,
+                                HttpServletResponse response) {
+        Product product = this.productsRestServer.createProduct(payload.title(), payload.details());
+        return "redirect:/shop/products/%d".formatted(product.id());
+    }
+
 
 }

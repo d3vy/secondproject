@@ -3,9 +3,14 @@ package com.devy.restserver.services;
 import com.devy.restserver.models.Product;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public interface ProductService {
 
     Iterable<Product> findAllProducts();
 
+    Product createProduct(String title, String details);
+
+    Optional<Product> findProduct(Integer id);
 }

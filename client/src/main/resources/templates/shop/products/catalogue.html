@@ -5,6 +5,7 @@
     <title>Shop Catalogue</title>
 </head>
 <body>
+<a data-th-href="@{/shop/products/create}">+ Create Product</a>
 <h1>Products Catalogue</h1>
 <table>
     <thead>
@@ -16,6 +17,10 @@
     <tbody>
     <tr data-th-each="product : ${products}">
         <td data-th-text="${product.id}"></td>
+        <td>
+            <a data-th-href="@{/shop/products/{productId}(productId=${product.id})}"
+               data-th-text="${product.title}"></a>
+        </td>
     </tr>
     </tbody>
 </table>
