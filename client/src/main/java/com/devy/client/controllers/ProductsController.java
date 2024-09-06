@@ -38,7 +38,7 @@ public class ProductsController {
 
         try {
             Product product = this.productsRestServer.createProduct(payload.title(), payload.details());
-            return "redirect:/catalogue/products/%d".formatted(product.id());
+            return "redirect:/shop/products/%d".formatted(product.id());
         } catch (BadRequestException exception) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
             model.addAttribute("payload", payload);
