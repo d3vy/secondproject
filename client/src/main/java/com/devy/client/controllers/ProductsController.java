@@ -1,10 +1,12 @@
 package com.devy.client.controllers;
 
+import com.devy.client.RestServer.BadRequestException;
 import com.devy.client.RestServer.ProductsRestServer;
 import com.devy.client.controllers.payload.NewProductPayload;
 import com.devy.client.models.Product;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +35,17 @@ public class ProductsController {
     public String createProduct(NewProductPayload payload,
                                 Model model,
                                 HttpServletResponse response) {
-        Product product = this.productsRestServer.createProduct(payload.title(), payload.details());
-        return "redirect:/shop/products/%d".formatted(product.id());
+
+        try {
+            Product product = this.productsRestServer.createProduct(payload.title(), payload.details());
+            return "redirect:/catalogue/products/%d".formatted(product.id());
+        } catch (BadRequestException exception) {
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            model.addAttribute("payload", payload);
+            return "catalogue/products/create";
+        }
+
+
     }
 
 

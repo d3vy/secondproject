@@ -44,7 +44,9 @@ public class ProductsRestServerImpl implements ProductsRestServer {
                     .body(Product.class);
         } catch (HttpClientErrorException.BadRequest exception) {
             log.error("Ошибка при создании продукта");
-            throw exception;
+            ProblemDetail problemDetail = exception.getResponseBodyAs(ProblemDetail.class);
+            assert problemDetail != null;
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
         }
     }
 
