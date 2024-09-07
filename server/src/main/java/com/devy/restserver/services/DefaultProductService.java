@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -39,7 +40,16 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    @Transactional
     public void updateProduct(Integer id, String title, String details) {
-
+        this.productRepository.findById(id)
+                .ifPresentOrElse(product -> {
+                            product.setTitle(title);
+                            product.setDetails(details);
+                        },
+                        () -> {
+                            log.error("Product not found in update method");
+                            throw new NoSuchElementException();
+                        });
     }
 }

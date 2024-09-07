@@ -12,6 +12,7 @@
     <li><strong>Title</strong>: <span data-th-text="${product.title}"></span></li>
     <li><strong>Details</strong>: <span data-th-text="${product.details}"></span></li>
 </ul>
+<a data-th-href="@{/shop/products/{productId}/edit(productId=${product.id})}">Edit</a>
 <form method="post" data-th-action="@{/shop/products/{productId}/delete(productId=${product.id})}">
     <button type="submit">Delete</button>
 </form>

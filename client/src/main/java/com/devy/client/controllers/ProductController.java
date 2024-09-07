@@ -1,9 +1,16 @@
 package com.devy.client.controllers;
 
+import com.devy.client.RestServer.BadRequestException;
 import com.devy.client.RestServer.ProductsRestServer;
+import com.devy.client.controllers.payload.UpdateProductPayload;
 import com.devy.client.models.Product;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -13,6 +20,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("shop/products/{productId:\\d+}")
 public class ProductController {
 
+    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     private final ProductsRestServer productsRestServer;
 
 
@@ -31,6 +39,27 @@ public class ProductController {
     public String deleteProduct(@ModelAttribute("product") Product product) {
         this.productsRestServer.deleteProduct(product.id());
         return "redirect:/shop/products/catalogue";
+    }
+
+    @GetMapping("edit")
+    public String getEditProductPage() {
+        return "shop/products/edit";
+    }
+
+    @PostMapping("edit")
+    public String updateProduct(@ModelAttribute(name = "product", binding = false) Product product,
+                                UpdateProductPayload payload,
+                                Model model,
+                                HttpServletResponse response) {
+        try {
+            this.productsRestServer.updateProduct(product.id(), payload.title(), payload.details());
+            return "redirect:/shop/products/%d".formatted(product.id());
+        } catch (BadRequestException exception) {
+            log.error("ошибка при обновлении продукта в контроллере");
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            model.addAttribute("payload", payload);
+            return "catalogue/products/edit";
+        }
     }
 
 }

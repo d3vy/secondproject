@@ -1,6 +1,7 @@
 package com.devy.client.RestServer;
 
 import com.devy.client.controllers.payload.NewProductPayload;
+import com.devy.client.controllers.payload.UpdateProductPayload;
 import com.devy.client.models.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +82,18 @@ public class ProductsRestServerImpl implements ProductsRestServer {
 
     @Override
     public void updateProduct(Integer id, String title, String details) {
-
+        try {
+            this.restClient
+                    .patch()
+                    .uri("/shop-api/products/{ProductId}", id)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(new UpdateProductPayload(title, details))
+                    .retrieve()
+                    .toBodilessEntity();
+        }catch (HttpClientErrorException.BadRequest exception){
+            log.error("Ошибка при обновлении продукта");
+            ProblemDetail problemDetail = exception.getResponseBodyAs(ProblemDetail.class);
+            throw new BadRequestException((List<String>) problemDetail.getProperties().get("errors"));
+        }
     }
 }
