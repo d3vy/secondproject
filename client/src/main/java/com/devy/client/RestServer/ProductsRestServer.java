@@ -15,4 +15,8 @@ public interface ProductsRestServer {
 
     Optional<Product> findProduct(Integer id);
 
+    void deleteProduct(Integer id);
+
+    void updateProduct(Integer id, String title, String details);
+
 }

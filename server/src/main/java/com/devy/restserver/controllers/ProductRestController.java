@@ -3,6 +3,7 @@ package com.devy.restserver.controllers;
 import com.devy.restserver.models.Product;
 import com.devy.restserver.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -23,6 +24,13 @@ public class ProductRestController {
     @GetMapping
     public Product findProduct(@ModelAttribute("product") Product product){
         return product;
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteProduct(@PathVariable("productId") Integer productId){
+        this.productService.deleteProduct(productId);
+        return ResponseEntity.noContent()
+                .build();
     }
 
 

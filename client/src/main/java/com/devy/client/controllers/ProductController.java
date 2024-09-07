@@ -4,10 +4,7 @@ import com.devy.client.RestServer.ProductsRestServer;
 import com.devy.client.models.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 
@@ -30,5 +27,10 @@ public class ProductController {
         return "shop/products/product";
     }
 
+    @PostMapping("delete")
+    public String deleteProduct(@ModelAttribute("product") Product product) {
+        this.productsRestServer.deleteProduct(product.id());
+        return "redirect:/shop/products/catalogue";
+    }
 
 }

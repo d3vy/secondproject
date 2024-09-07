@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -59,8 +60,27 @@ public class ProductsRestServerImpl implements ProductsRestServer {
                     .retrieve()
                     .body(Product.class));
         } catch (HttpClientErrorException.NotFound exception) {
-            log.error("Продукт с id: {} не найден", id);
+            log.error("Продукт с id: {} не найден в методе find", id);
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void deleteProduct(Integer id) {
+        try {
+            this.restClient
+                    .delete()
+                    .uri("/shop-api/products/{productId}", id)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (HttpClientErrorException.NotFound exception) {
+            log.error("Продукт с id: {} не найден в методе delete", id);
+            throw new NoSuchElementException(exception);
+        }
+    }
+
+    @Override
+    public void updateProduct(Integer id, String title, String details) {
+
     }
 }

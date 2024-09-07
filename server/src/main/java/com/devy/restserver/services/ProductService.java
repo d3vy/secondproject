@@ -13,4 +13,8 @@ public interface ProductService {
     Product createProduct(String title, String details);
 
     Optional<Product> findProduct(Integer id);
+
+    void deleteProduct(Integer id);
+
+    void updateProduct(Integer id, String title, String details);
 }
