@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ProductsRestServer {
 
-    List<Product> finaAllProducts();
+    List<Product> finaAllProducts(String filter);
 
     Product createProduct(String title, String details);
 

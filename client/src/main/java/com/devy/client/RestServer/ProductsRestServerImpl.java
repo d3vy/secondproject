@@ -26,10 +26,10 @@ public class ProductsRestServerImpl implements ProductsRestServer {
     };
 
     @Override
-    public List<Product> finaAllProducts() {
+    public List<Product> finaAllProducts(String filter) {
         return this.restClient
                 .get()
-                .uri("/shop-api/products")
+                .uri("/shop-api/products?filter={filter}", filter)
                 .retrieve()
                 .body(PRODUCTS_TYPE_REFERENCE);
     }
