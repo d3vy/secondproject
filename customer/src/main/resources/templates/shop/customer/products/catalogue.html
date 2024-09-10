@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Catalogue</title>
+</head>
+<body>
+<h1>Product Catalogue</h1>
+<ul>
+    <li data-th-each="product : %{products}">
+        <strong>
+            <a data-th-text="${product.title}"
+               data-th-href="@{/shop/customer/products/{productId}(productId={product.id})}"></a>
+        </strong>
+    </li>
+</ul>
+</body>
+</html>

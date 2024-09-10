@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Shop Catalogue</title>
+</head>
+<body>
+<a data-th-href="@{/shop/products/create}">+ Create Product</a>
+<h1>Products Catalogue</h1>
+<form method="get" data-th-action="@{/shop/products/catalogue}">
+    <label>Filter:<input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Search</button>
+    </label>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Product</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product : ${products}">
+        <td data-th-text="${product.id}"></td>
+        <td>
+            <a data-th-href="@{/shop/products/{productId}(productId=${product.id})}"
+               data-th-text="${product.title}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
