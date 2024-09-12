@@ -19,6 +19,7 @@ public class ProductsController {
     @GetMapping("catalogue")
     public Mono<String> getProductsCataloguePage(Model model,
                                                  @RequestParam(name = "filter", required = false) String filter) {
+        model.addAttribute("filter", filter);
         return this.productsClient.findAllProducts(filter)
                 .collectList()
                 .doOnNext(products -> model.addAttribute("products", products))

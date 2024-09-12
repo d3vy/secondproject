@@ -11,7 +11,7 @@ public class ClientBeans {
 
     @Bean
     public ProductsClientImpl productsClientImpl(
-            @Value("@{shop.services.catalogue.uri:http://localhost:8081}") String catalogueBaseUrl
+            @Value("${shop.services.catalogue.uri:http://localhost:8081}") String catalogueBaseUrl
     ) {
         return new ProductsClientImpl(WebClient.builder()
                 .baseUrl(catalogueBaseUrl)
