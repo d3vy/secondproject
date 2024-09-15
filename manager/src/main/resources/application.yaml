@@ -6,7 +6,6 @@ spring:
     driver-class-name: org.postgresql.Driver
   flyway:
     schemas:
-      - customer
       - manager
   profiles:
     active:

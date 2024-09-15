@@ -16,7 +16,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("shop-api/products")
 @RequiredArgsConstructor
-@Slf4j
 public class ProductsRestController {
 
     private final ProductService productService;
@@ -33,10 +32,8 @@ public class ProductsRestController {
             throws BindException {
         if (bindingResult.hasErrors()) {
             if (bindingResult instanceof BindException exception) {
-                log.error("1)Ошибка при создании продукта");
                 throw exception;
             } else {
-                log.error("2)Ошибка при создании продукта");
                 throw new BindException(bindingResult);
             }
         } else {

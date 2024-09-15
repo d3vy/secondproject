@@ -24,7 +24,7 @@
     <modules>
         <module>server</module>
         <module>manager</module>
-        <module>customer</module>
+        <module>reactiveCustomer</module>
     </modules>
     <scm>
         <connection/>
