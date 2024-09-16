@@ -1,0 +1,10 @@
+shop:
+  services:
+    catalogue:
+      uri: http://localhost:8081
+    feedback:
+      uri: http://localhost:8085
+
+
+server:
+  port: 8084

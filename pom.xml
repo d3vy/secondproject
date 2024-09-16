@@ -22,9 +22,10 @@
         <developer/>
     </developers>
     <modules>
-        <module>server</module>
-        <module>manager</module>
-        <module>reactiveCustomer</module>
+        <module>shop-service</module>
+        <module>manager-application</module>
+        <module>reactive-customer-application</module>
+        <module>reactive-feedback-service</module>
     </modules>
     <scm>
         <connection/>
