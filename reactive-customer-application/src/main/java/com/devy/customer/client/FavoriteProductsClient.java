@@ -6,9 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface FavoriteProductsClient {
 
-    Mono<FavoriteProduct> findFavoriteProduct(Integer productId);
-
     Flux<FavoriteProduct> findAllFavoriteProducts();
+
+    Mono<FavoriteProduct> findFavoriteProduct(Integer productId);
 
     Mono<FavoriteProduct> addProductToFavorites(Integer productId);
 

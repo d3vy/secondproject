@@ -38,7 +38,7 @@ public class FavoriteProductsRestController {
                 .map(favoriteProduct ->
                         ResponseEntity
                                 .created(uriBuilder
-                                        .replacePath("feedback-api/favorite-products/{id}")
+                                        .replacePath("/feedback-api/favorite-products/{id}")
                                         .build(favoriteProduct.getId()))
                                 .body(favoriteProduct));
     }

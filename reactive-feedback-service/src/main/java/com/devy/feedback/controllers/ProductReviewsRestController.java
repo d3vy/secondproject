@@ -37,7 +37,7 @@ public class ProductReviewsRestController {
                                         payload.rating(),
                                         payload.review()))
                 .map(productReview ->
-                        ResponseEntity.created(uriBuilder.replacePath("feedback-api/product-reviews/{id}")
+                        ResponseEntity.created(uriBuilder.replacePath("/feedback-api/product-reviews/{id}")
                                         .build(productReview.getId()))
                                 .body(productReview));
     }
