@@ -31,12 +31,11 @@ public class ProductController {
         return this.productReviewsClient.findProductReviewsByProductId(productId)
                 .collectList()
                 .doOnNext(productReviews -> model.addAttribute("reviews", productReviews))
-                .then(this.favoriteProductsClient.findFavoriteProduct(productId))
-                .doOnNext(favoriteProduct -> model.addAttribute("inFavorite", true))
+                .then(this.favoriteProductsClient.findFavoriteProduct(productId)
+                        .doOnNext(favoriteProduct -> model.addAttribute("inFavorite", true)))
                 .then(this.productsClient.findProduct(productId)
-                        .switchIfEmpty(Mono.error(new NoSuchElementException("Product not found"))))
-                .doOnNext(product -> model.addAttribute("product", product))
-                .then(Mono.just("shop/customer/products/product"));
+                        .doOnNext(product -> model.addAttribute("product", product))
+                        .thenReturn("/shop/customer/products/product"));
     }
 
     @PostMapping("add-to-favorites")

@@ -30,7 +30,7 @@ public class FavoriteProductsRestController {
 
     @PostMapping
     public Mono<ResponseEntity<FavoriteProduct>> addProductToFavorites(
-            @Valid @RequestBody Mono<NewFavoriteProductPayload> payloadMono,
+            @RequestBody Mono<NewFavoriteProductPayload> payloadMono,
             UriComponentsBuilder uriBuilder) {
         return payloadMono
                 .flatMap(payload ->
@@ -38,10 +38,12 @@ public class FavoriteProductsRestController {
                 .map(favoriteProduct ->
                         ResponseEntity
                                 .created(uriBuilder
-                                        .replacePath("/feedback-api/favorite-products/{id}")
+                                        .replacePath("feedback-api/favorite-products/{id}")
                                         .build(favoriteProduct.getId()))
                                 .body(favoriteProduct));
     }
+
+
 
     @DeleteMapping("by-product-id/{productId:\\d+}")
     public Mono<ResponseEntity<Void>> removeProductFromFavorites(@PathVariable Integer productId) {

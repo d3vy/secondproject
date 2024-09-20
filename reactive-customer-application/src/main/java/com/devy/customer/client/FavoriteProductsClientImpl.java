@@ -45,13 +45,10 @@ public class FavoriteProductsClientImpl implements FavoriteProductsClient {
                 .bodyValue(new NewFavoriteProductPayload(productId))
                 .retrieve()
                 .bodyToMono(FavoriteProduct.class)
-                .onErrorMap(WebClientResponseException.BadRequest.class, exception ->
-                        new ClientBadRequestException(
-                                exception,
-                                ((List<String>) Objects
-                                        .requireNonNull(exception.getResponseBodyAs(ProblemDetail.class))
-                                        .getProperties()
-                                        .get("errors"))));
+                .onErrorMap(WebClientResponseException.BadRequest.class,
+                        exception -> new ClientBadRequestException(exception,
+                                ((List<String>) exception.getResponseBodyAs(ProblemDetail.class)
+                                        .getProperties().get("errors"))));
     }
 
     @Override

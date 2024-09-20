@@ -8,6 +8,6 @@ public interface ProductsClient {
 
     Flux<Product> findAllProducts(String filter);
 
-    Mono<Product> findProduct(int id);
+    Mono<Product> findProduct(Integer id);
 
 }

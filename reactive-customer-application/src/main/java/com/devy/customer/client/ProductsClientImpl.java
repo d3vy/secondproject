@@ -14,15 +14,17 @@ public class ProductsClientImpl implements ProductsClient {
 
     @Override
     public Flux<Product> findAllProducts(String filter) {
-        return this.webClient.get()
+        return this.webClient
+                .get()
                 .uri("/shop-api/products?filter={filter}", filter)
                 .retrieve()
                 .bodyToFlux(Product.class);
     }
 
     @Override
-    public Mono<Product> findProduct(int id) {
-        return this.webClient.get()
+    public Mono<Product> findProduct(Integer id) {
+        return this.webClient
+                .get()
                 .uri("/shop-api/products/{productId}", id)
                 .retrieve()
                 .bodyToMono(Product.class)
