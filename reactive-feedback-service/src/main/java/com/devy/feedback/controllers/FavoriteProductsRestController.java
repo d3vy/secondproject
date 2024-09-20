@@ -3,7 +3,6 @@ package com.devy.feedback.controllers;
 import com.devy.feedback.controllers.payload.NewFavoriteProductPayload;
 import com.devy.feedback.models.FavoriteProduct;
 import com.devy.feedback.services.FavoriteProductsService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

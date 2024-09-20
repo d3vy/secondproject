@@ -17,6 +17,15 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ProductReviewsRestController {
 
+    //Можно искать товары и таким образом, напрямую обращаясь к mongodb.
+//    private final ReactiveMongoTemplate reactiveMongoTemplate;
+//
+//    @GetMapping("by-product-id/{productId:\\d+}")
+//    public Flux<ProductReview> findProductReviewsByProductId(@PathVariable("productId") Integer productId) {
+//       return this.reactiveMongoTemplate
+//               .find(Query.query(Criteria.where("productId").is(productId)) , ProductReview.class);
+//    }
+
     private final ProductReviewsService productReviewsService;
 
     @GetMapping("by-product-id/{productId:\\d+}")
@@ -37,7 +46,7 @@ public class ProductReviewsRestController {
                                         payload.rating(),
                                         payload.review()))
                 .map(productReview ->
-                        ResponseEntity.created(uriBuilder.replacePath("/feedback-api/product-reviews/{id}")
+                        ResponseEntity.created(uriBuilder.replacePath("/ feedback-api/product-reviews/{id}")
                                         .build(productReview.getId()))
                                 .body(productReview));
     }
