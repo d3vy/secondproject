@@ -5,16 +5,21 @@ import com.devy.feedback.models.ProductReview;
 import com.devy.feedback.services.ProductReviewsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.security.Principal;
+
 
 @RestController
 @RequestMapping("feedback-api/product-reviews")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductReviewsRestController {
 
     //Можно искать товары и таким образом, напрямую обращаясь к mongodb.
@@ -37,14 +42,17 @@ public class ProductReviewsRestController {
     @PostMapping
     public Mono<ResponseEntity<ProductReview>> createProductReview(
             @Valid @RequestBody Mono<NewProductReviewPayload> payloadMono,
+            Mono<JwtAuthenticationToken> authenticationTokenMono,
             UriComponentsBuilder uriBuilder) {
-        return payloadMono
-                .flatMap(payload ->
-                        this.productReviewsService
-                                .createProductReview(
-                                        payload.productId(),
-                                        payload.rating(),
-                                        payload.review()))
+        return authenticationTokenMono.flatMap(token ->
+                        payloadMono
+                                .flatMap(payload ->
+                                        this.productReviewsService
+                                                .createProductReview(
+                                                        payload.productId(),
+                                                        payload.rating(),
+                                                        payload.review(),
+                                                        token.getToken().getSubject())))
                 .map(productReview ->
                         ResponseEntity.created(uriBuilder.replacePath("/ feedback-api/product-reviews/{id}")
                                         .build(productReview.getId()))

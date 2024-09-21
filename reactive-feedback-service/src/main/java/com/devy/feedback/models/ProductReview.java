@@ -23,6 +23,6 @@ public class ProductReview {
 
     private String review;
 
-
+    private String userId;
 
 }
