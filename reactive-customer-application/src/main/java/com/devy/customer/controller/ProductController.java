@@ -7,8 +7,8 @@ import com.devy.customer.client.exception.ClientBadRequestException;
 import com.devy.customer.controller.payload.NewProductReviewPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.security.web.reactive.result.view.CsrfRequestDataValueProcessor;
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -87,7 +87,7 @@ public class ProductController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException e, Model model) {
         model.addAttribute("error", e.getMessage());
-        return "templates/errors/404";
+        return "errors/404";
     }
 
 }
