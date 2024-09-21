@@ -5,5 +5,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/secondproject_reactive-feedback-service_db
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/realms/secondproject
   jpa:
     show-sql: true

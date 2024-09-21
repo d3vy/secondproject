@@ -4,10 +4,23 @@ shop:
       uri: http://localhost:8081
     feedback:
       uri: http://localhost:8085
-
-
 server:
   port: 8084
 spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuerUri: http://localhost:8083/realms/secondproject
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: customer-application
+            client-secret: NN4dBuRuyGQzh6LoMClVCxwXppRjbyWG
+            scope:
+              - openid
+              - edit_products_catalogue
+
   jpa:
     show-sql: true
