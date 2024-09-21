@@ -7,12 +7,16 @@ import com.devy.customer.client.exception.ClientBadRequestException;
 import com.devy.customer.controller.payload.NewProductReviewPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.web.server.csrf.CsrfToken;
+import org.springframework.security.web.reactive.result.view.CsrfRequestDataValueProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -71,6 +75,13 @@ public class ProductController {
                             .doOnNext(favoriteProduct -> model.addAttribute("inFavorite", true))
                             .thenReturn("shop/customer/products/product");
                 });
+    }
+
+    @ModelAttribute
+    public Mono<CsrfToken> loadCsrfToken(ServerWebExchange exchange) {
+        return Objects.requireNonNull(exchange.<Mono<CsrfToken>>getAttribute(CsrfToken.class.getName()))
+                .doOnSuccess(token -> exchange.getAttributes()
+                        .put(CsrfRequestDataValueProcessor.DEFAULT_CSRF_ATTR_NAME, token));
     }
 
     @ExceptionHandler(NoSuchElementException.class)
