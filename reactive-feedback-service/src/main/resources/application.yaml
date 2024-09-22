@@ -1,6 +1,5 @@
 server:
   port: 8085
-
 spring:
   data:
     mongodb:
@@ -12,3 +11,10 @@ spring:
           issuer-uri: http://localhost:8083/realms/secondproject
   jpa:
     show-sql: true
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: feedback-service-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+keycloak:
+  uri: http://localhost:8083

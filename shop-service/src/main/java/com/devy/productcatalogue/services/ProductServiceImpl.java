@@ -1,7 +1,7 @@
-package com.devy.restserver.services;
+package com.devy.productcatalogue.services;
 
-import com.devy.restserver.models.Product;
-import com.devy.restserver.repositories.ProductRepository;
+import com.devy.productcatalogue.models.Product;
+import com.devy.productcatalogue.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

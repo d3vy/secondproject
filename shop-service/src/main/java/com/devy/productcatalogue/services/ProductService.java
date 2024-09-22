@@ -1,6 +1,6 @@
-package com.devy.restserver.services;
+package com.devy.productcatalogue.services;
 
-import com.devy.restserver.models.Product;
+import com.devy.productcatalogue.models.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

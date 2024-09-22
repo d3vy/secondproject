@@ -1,8 +1,8 @@
-package com.devy.restserver.controllers;
+package com.devy.productcatalogue.controllers;
 
-import com.devy.restserver.controllers.payload.UpdateProductPayload;
-import com.devy.restserver.models.Product;
-import com.devy.restserver.services.ProductService;
+import com.devy.productcatalogue.controllers.payload.UpdateProductPayload;
+import com.devy.productcatalogue.models.Product;
+import com.devy.productcatalogue.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

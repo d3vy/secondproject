@@ -1,6 +1,6 @@
-package com.devy.restserver.repositories;
+package com.devy.productcatalogue.repositories;
 
-import com.devy.restserver.models.Product;
+import com.devy.productcatalogue.models.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

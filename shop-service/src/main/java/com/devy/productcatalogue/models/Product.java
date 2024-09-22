@@ -1,4 +1,4 @@
-package com.devy.restserver.models;
+package com.devy.productcatalogue.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
