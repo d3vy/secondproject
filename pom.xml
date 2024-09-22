@@ -26,6 +26,7 @@
         <module>manager-application</module>
         <module>reactive-customer-application</module>
         <module>reactive-feedback-service</module>
+        <module>admin-server</module>
     </modules>
     <scm>
         <connection/>
