@@ -7,6 +7,14 @@ shop:
 server:
   port: 8084
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8086
+        instance:
+          name: customer-application
+          service-host-type: ip
+        enabled: true
   security:
     oauth2:
       client:
@@ -21,6 +29,25 @@ spring:
             scope:
               - openid
               - edit_products_catalogue
-
+          metrics:
+            provider: keycloak
+            client-id: customer-application-metrics-client
+            client-secret: Uqz4ALxxVBxTAjwBCNB6a7lyuFM96W9Z
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/secondproject
   jpa:
     show-sql: true
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

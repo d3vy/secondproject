@@ -1,6 +1,14 @@
 server:
   port: 8085
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8086
+        instance:
+          name: feedback-service
+          service-host-type: ip
+        enabled: true
   data:
     mongodb:
       uri: mongodb://localhost:27017/secondproject_reactive-feedback-service_db
@@ -9,6 +17,18 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8083/realms/secondproject
+      client:
+        registration:
+          keycloak:
+            clientId: feedback-service-metrics-client
+            clientSecret: FIvFyHrumTWOcvkah2SJiFYlVA0BgUfw
+            authorizationGrantType: client_credentials
+            scope:
+              - metrics_server
+        provider:
+          keycloak:
+            issuerUri: http://localhost:8083/realms/secondproject
+
   jpa:
     show-sql: true
 springdoc:
@@ -18,3 +38,13 @@ springdoc:
       use-pkce-with-authorization-code-grant: true
 keycloak:
   uri: http://localhost:8083
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

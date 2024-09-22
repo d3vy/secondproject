@@ -143,6 +143,12 @@
                 <artifactId>spring-restdocs-mockmvc</artifactId>
                 <version>3.0.1</version>
             </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

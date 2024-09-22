@@ -18,13 +18,16 @@ public class SecurityBeans {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers(HttpMethod.GET)
+                        .permitAll()
                         .requestMatchers(HttpMethod.POST, "/shop-api/products")
                         .hasAuthority("SCOPE_edit_products_catalogue")
                         .requestMatchers(HttpMethod.PATCH, "/shop-api/products/{productId:\\d+}")
                         .hasAuthority("SCOPE_edit_products_catalogue")
                         .requestMatchers(HttpMethod.DELETE, "/shop-api/products/{productId:\\d+}")
                         .hasAuthority("SCOPE_edit_products_catalogue")
+                        .requestMatchers("/actuator/**")
+                        .hasAuthority("SCOPE_metrics")
                         .anyRequest().denyAll()
                 )
                 .csrf(CsrfConfigurer::disable)
@@ -32,6 +35,7 @@ public class SecurityBeans {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults()))
+                .oauth2Client(Customizer.withDefaults())
                 .build();
     }
 

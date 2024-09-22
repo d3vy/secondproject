@@ -16,10 +16,13 @@ public class SecurityBeans {
                 .authorizeExchange(configurer -> configurer
                         .pathMatchers("/webjars/**", "/v3/api-docs/**", "/swagger-ui/**")
                         .permitAll()
+                        .pathMatchers("/actuator/**")
+                        .hasAuthority("SCOPE_metrics")
                         .anyExchange().authenticated())
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 .oauth2ResourceServer(customizer -> customizer.jwt(Customizer.withDefaults()))
+                .oauth2Client(Customizer.withDefaults())
                 .build();
     }
 }
