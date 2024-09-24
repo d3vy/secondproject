@@ -1,4 +1,4 @@
-package com.devy;
+package com.devy.admin;
 
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;

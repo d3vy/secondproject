@@ -24,3 +24,10 @@ spring:
               - openid
             clientId: admin-service
             clientSecret: eJuctbzpC09WcWZX5NZnv0eth8vXferD
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
