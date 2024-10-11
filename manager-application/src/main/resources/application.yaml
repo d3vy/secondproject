@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: manager-application
   boot:
     admin:
       client:
@@ -60,9 +62,8 @@ server:
 logging:
   level:
     sql: info
-
 shop:
   services:
     catalogue:
-      uri: http://localhost:8081
+      uri: lb://shop-service
       registration-id: keycloak

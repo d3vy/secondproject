@@ -27,6 +27,7 @@
         <module>reactive-customer-application</module>
         <module>reactive-feedback-service</module>
         <module>admin-server</module>
+        <module>eureka-server</module>
     </modules>
     <scm>
         <connection/>
@@ -46,6 +47,7 @@
         <flyway.version>10.16.0</flyway.version>
         <keycloak.version>24.0.4</keycloak.version>
         <postgres.version>42.7.3</postgres.version>
+        <spring-cloud.version>2023.0.2</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -154,6 +156,11 @@
                 <artifactId>spring-boot-docker-compose</artifactId>
                 <optional>true</optional>
                 <version>${spring-docker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

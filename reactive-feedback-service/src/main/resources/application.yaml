@@ -1,6 +1,8 @@
 server:
   port: 8085
 spring:
+  application:
+    name: reactive-feedback-service
   boot:
     admin:
       client:
@@ -28,7 +30,6 @@ spring:
         provider:
           keycloak:
             issuerUri: http://localhost:8083/realms/secondproject
-
   jpa:
     show-sql: true
 springdoc:
@@ -48,3 +49,9 @@ management:
     web:
       exposure:
         include: "*"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

@@ -1,6 +1,8 @@
 server:
   port: 8086
 spring:
+  application:
+    name: admin-server
   security:
     oauth2:
       resourceserver:
